@@ -2,8 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Movie.css";
 
-function Movie({ year, title, summary, poster, genres,trailer }) {
-  const trailerUrl = `https://youtu.be/${trailer}`
+function Movie({ year, title, summary, poster, genres, trailer }) {
+  const temp = []
+  temp.push({ trailer })
+  const trailerAvailable = temp.map(code => {
+    if (code.trailer === '') {
+      return <p></p>
+    } else {
+      let url = `https://youtu.be/${code.trailer}`;
+      return <a href={url} target='blank'>🎞<span>Watch Trailer Now</span>🎞</a>
+    }
+  })
+
   return (
     <div className='movie'>
       <img src={poster} alt={title} title={title} />
@@ -15,10 +25,8 @@ function Movie({ year, title, summary, poster, genres,trailer }) {
             <li className='genres_genre' key={index}>{genre}</li>
           ))}
         </ul>
-        <p className='movie_summary'>{summary}</p>
-        <a href={trailerUrl} target='blank'>
-          🎞<span>Watch Trailer Now</span>🎞
-        </a>
+        <p className='movie_summary'>{summary.slice(0, 140)}...</p>
+        {trailerAvailable}
       </div>
     </div>
   );
