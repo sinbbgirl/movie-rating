@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Movie.css";
 
-function Movie({ year, title, summary, poster, genres }) {
+function Movie({ year, title, summary, poster, genres,trailer }) {
+  const trailerUrl = `https://youtu.be/${trailer}`
   return (
     <div className='movie'>
       <img src={poster} alt={title} title={title} />
@@ -15,6 +16,9 @@ function Movie({ year, title, summary, poster, genres }) {
           ))}
         </ul>
         <p className='movie_summary'>{summary}</p>
+        <a href={trailerUrl} target='blank'>
+          🎞<span>Watch Trailer Now</span>🎞
+        </a>
       </div>
     </div>
   );
